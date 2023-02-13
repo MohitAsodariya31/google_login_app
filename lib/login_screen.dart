@@ -2,56 +2,54 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class SocialLoginScreen extends StatefulWidget {
-  const SocialLoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<SocialLoginScreen> createState() => _SocialLoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SocialLoginScreenState extends State<SocialLoginScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   UserCredential? userCredential;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Google Login"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 12),
-            GestureDetector(
-              onTap: () async {
-                userCredential = await signInWithGoogle();
+      body: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () async {
+                  await signInWithGoogle();
 
-                debugPrint("userCredential ------>>> ${userCredential!.user!.displayName}");
-                debugPrint("userCredential ------>>> ${userCredential!.user!.email}");
-                debugPrint("userCredential ------>>> ${userCredential!.user!.phoneNumber}");
-                debugPrint("userCredential ------>>> ${userCredential!.user!.photoURL}");
-                debugPrint("userCredential ------>>> ${userCredential!.user!.uid}");
-              },
-              child: Container(
-                height: 50,
-                width: 200,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Text(
-                  "Google Login",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                  // debugPrint("Auth ----------->> ${auth.currentUser!.displayName}");
+                },
+                child: Container(
+                  width: 200,
+                  height: 50,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.black,
+                  ),
+                  child: const Text(
+                    'Sign in with Google',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 16,
+              ),
+            ],
+          ),
         ),
       ),
     );
