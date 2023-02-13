@@ -15,41 +15,43 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () async {
-                  await signInWithGoogle();
+      appBar: AppBar(
+        title: const Text("Google Login"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 12),
+            GestureDetector(
+              onTap: () async {
+                userCredential = await signInWithGoogle();
 
-                  // debugPrint("Auth ----------->> ${auth.currentUser!.displayName}");
-                },
-                child: Container(
-                  width: 200,
-                  height: 50,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.black,
-                  ),
-                  child: const Text(
-                    'Sign in with Google',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                debugPrint("userCredential ------>>> ${userCredential!.user!.displayName}");
+                debugPrint("userCredential ------>>> ${userCredential!.user!.email}");
+                debugPrint("userCredential ------>>> ${userCredential!.user!.phoneNumber}");
+                debugPrint("userCredential ------>>> ${userCredential!.user!.photoURL}");
+                debugPrint("userCredential ------>>> ${userCredential!.user!.uid}");
+              },
+              child: Container(
+                width: 200,
+                height: 50,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.black,
+                ),
+                child: const Text(
+                  'Sign in with Google',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 16,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
